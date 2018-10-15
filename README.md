@@ -1,2 +1,2 @@
 # client-react
-React,js client app
+React.js client app
