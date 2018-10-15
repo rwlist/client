@@ -15,10 +15,10 @@ import Fetcher from './util/Fetcher';
 
 const styles = {
     flex: {
-      flexGrow: 1,
+        flexGrow: 1,
     },
-  };
-  
+};
+
 
 class App extends Component {
     constructor(props) {
@@ -37,22 +37,22 @@ class App extends Component {
         const { classes } = this.props;
 
         const tabs = [
-            [<UserPage fetcher={this.fetcher}/>, "User"],
-            [<Lists fetcher={this.fetcher}/>, "Lists"],
-            [<STree fetcher={this.fetcher}/>, "My STree"],
+            [<UserPage fetcher={this.fetcher} />, "User"],
+            [<Lists fetcher={this.fetcher} />, "Lists"],
+            [<STree fetcher={this.fetcher} />, "My STree"],
         ]
 
         const content = tabs[this.state.tab][0];
         return (
             <MuiThemeProvider theme={theme}>
-                <CssBaseline/>
+                <CssBaseline />
                 <AppBar position="static" color="primary">
                     <Toolbar>
                         <Typography variant="title" color="inherit" className={classes.flex}>
                             rwlist.io
                         </Typography>
                         <Tabs value={this.state.tab} onChange={this.handleTab}>
-                            {tabs.map((it, index) => <Tab label={it[1]} key={index}/>)}
+                            {tabs.map((it, index) => <Tab label={it[1]} key={index} />)}
                         </Tabs>
                     </Toolbar>
                 </AppBar>
