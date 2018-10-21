@@ -7,13 +7,14 @@ import {
     SIGNUP_FAILURE,
     LOGOUT_ACTION,
 } from "../constants/auth"
+import { loadState } from "../localStorage"
 
 export const STATUS_NOT_LOGGED_IN = "STATUS_NOT_LOGGED_IN"
 export const STATUS_LOGGING_IN = "STATUS_LOGGING_IN"
 export const STATUS_LOGGED_IN = "STATUS_LOGGED_IN"
 
 // TODO: put jwt in localStorage
-const jwt = JSON.parse(localStorage.getItem("jwt"))
+const jwt = loadState("jwt")
 const initialState = jwt
     ? {
           status: STATUS_LOGGED_IN,
