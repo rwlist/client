@@ -1,9 +1,9 @@
-import React, { Component } from "react"
+import React from "react"
 import { Route, Redirect } from "react-router-dom"
 import { STATUS_LOGGED_IN } from "../reducers/auth"
 import { connect } from "react-redux"
 
-const PrivateRoute = ({ component, loggedIn, ...rest }) => (
+const PrivateRoute = ({ component: Component, loggedIn, ...rest }) => (
     <Route
         {...rest}
         render={props =>

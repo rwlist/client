@@ -4,6 +4,7 @@ import { STATUS_LOGGED_IN } from "../../reducers/auth"
 import { Redirect, Link } from "react-router-dom"
 import LoginFields from "./LoginFields"
 import { login } from "../../actions/auth/login"
+import LoginStatus from "./LoginStatus"
 
 class Login extends Component {
     render() {
@@ -14,6 +15,7 @@ class Login extends Component {
             <div>
                 <h2>Здравствуйте, вы незологинены</h2>
                 <br />
+                <LoginStatus auth={this.props.auth} />
                 <LoginFields action={this.props.action} />
                 <br />
                 <Link to="/signup">Я лучше зорегаюсь</Link>

@@ -14,7 +14,7 @@ class App extends Component {
                 <div>
                     <Route path="/login" component={Login} />
                     <Route path="/signup" component={SignUp} />
-                    <PrivateRoute exact path="/" component={Base} />
+                    <PrivateRoute path="/" component={Base} />
                 </div>
             </BrowserRouter>
         )
