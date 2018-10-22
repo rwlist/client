@@ -1,5 +1,5 @@
 import React from "react"
-import { Route, Redirect } from "react-router-dom"
+import { Route, Redirect, withRouter } from 'react-router-dom';
 import { STATUS_LOGGED_IN } from "../reducers/auth"
 import { connect } from "react-redux"
 
@@ -27,4 +27,4 @@ const mapStateToProps = store => {
     }
 }
 
-export default connect(mapStateToProps)(PrivateRoute)
+export default withRouter(connect(mapStateToProps)(PrivateRoute))

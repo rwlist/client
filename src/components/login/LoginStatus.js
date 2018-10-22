@@ -1,16 +1,11 @@
 import React, { Component } from "react"
-import ReactJson from "react-json-view"
-import "./LoginStatus.css"
+import TError from "../TError"
 
 class LoginStatus extends Component {
     render() {
         const { auth } = this.props
         if (auth.error) {
-            return (
-                <div className="LoginStatus LoginStatus_error">
-                    <ReactJson src={auth.error} />
-                </div>
-            )
+            return <TError err={auth.error} />
         }
         return null
     }

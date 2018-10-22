@@ -1,21 +1,20 @@
 import React, { Component } from "react"
-import { Route, BrowserRouter } from "react-router-dom"
+import { Route, BrowserRouter, Switch } from 'react-router-dom';
 
 import Login from "./components/login/Login"
 import SignUp from "./components/login/SignUp"
-import Base from "./components/Base"
+import Base from "./pages/Base"
 import PrivateRoute from "./components/PrivateRoute"
 
 class App extends Component {
     render() {
-        console.log("render")
         return (
             <BrowserRouter>
-                <div>
+                <Switch>
                     <Route path="/login" component={Login} />
                     <Route path="/signup" component={SignUp} />
                     <PrivateRoute path="/" component={Base} />
-                </div>
+                </Switch>
             </BrowserRouter>
         )
     }

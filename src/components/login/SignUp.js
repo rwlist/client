@@ -1,7 +1,7 @@
 import React, { Component } from "react"
 import { STATUS_LOGGED_IN } from "../../reducers/auth"
 import { connect } from "react-redux"
-import { Redirect, Link } from "react-router-dom"
+import { Redirect, Link, withRouter } from "react-router-dom"
 import SignUpFields from "./SignUpFields"
 import { signup } from "../../actions/auth/signup"
 import LoginStatus from "./LoginStatus"
@@ -9,7 +9,7 @@ import LoginStatus from "./LoginStatus"
 class SignUp extends Component {
     render() {
         if (this.props.auth.status === STATUS_LOGGED_IN) {
-            return <Redirect to="/" />
+            return <Redirect push from="/signup" to="/" />
         }
         return (
             <div>
@@ -36,7 +36,9 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(SignUp)
+export default withRouter(
+    connect(
+        mapStateToProps,
+        mapDispatchToProps
+    )(SignUp)
+)

@@ -1,8 +1,8 @@
-.LoginStatus_error {
+.TError_error {
     border: 2px dashed red;
     padding: 20px;
 }
 
-.LoginStatus {
+.TError {
     margin-bottom: 20px;
 }

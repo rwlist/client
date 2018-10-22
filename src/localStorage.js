@@ -13,6 +13,10 @@ export const loadState = key => {
 
 export const saveState = (key, state) => {
     try {
+        if (!state) {
+            localStorage.removeItem(key)
+            return
+        }
         const serializedState = JSON.stringify(state)
         localStorage.setItem(key, serializedState)
     } catch (err) {

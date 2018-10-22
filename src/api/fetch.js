@@ -8,7 +8,11 @@ export const fetchAuth = auth => (method, endpoint, body) => {
         },
         body: JSON.stringify(body),
     }
+    if (auth.jwt && auth.jwt.Token) {
+        args.headers["Authorization"] = "Bearer " + auth.jwt.Token
+    }
     return fetch(ENTRYPOINT + endpoint, args).then(async it => {
+        // TODO: dispatch INVALID_AUTH event on unauthorized response
         if (it.ok) {
             return it.json()
         } else {
