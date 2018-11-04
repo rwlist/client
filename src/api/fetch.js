@@ -1,4 +1,4 @@
-const ENTRYPOINT = "http://api.rwlist.io"
+const ENTRYPOINT = process.env.REACT_APP_ENTRYPOINT || "http://api.rwlist.io"
 // TODO: take from env
 
 export const fetchAuth = auth => (method, endpoint, body) => {
