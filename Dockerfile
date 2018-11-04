@@ -8,7 +8,7 @@ WORKDIR /usr/src/app
 ENV PATH /usr/src/app/node_modules/.bin:$PATH
 
 # set api entrypoint
-ENV ENTRYPOINT http://rwlist.io:9090
+ENV ENTRYPOINT http://api.rwlist.io
 
 # install and cache app dependencies
 COPY *.json /usr/src/app/

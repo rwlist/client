@@ -1,4 +1,4 @@
-const ENTRYPOINT = "http://rwlist.io:9090"
+const ENTRYPOINT = "http://api.rwlist.io"
 // TODO: take from env
 
 export const fetchAuth = auth => (method, endpoint, body) => {
