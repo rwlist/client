@@ -1,0 +1,8 @@
+.TError_error {
+    border: 2px dashed red;
+    padding: 20px;
+}
+
+.TError {
+    margin-bottom: 20px;
+}
