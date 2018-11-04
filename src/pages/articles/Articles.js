@@ -6,10 +6,11 @@ import TError from "../../components/TError"
 import ArticleList from "../../components/articles/ArticleList"
 import Loading from "../../components/Loading"
 import AddMany from "./AddMany"
+import { onArticleClick, changeArticleStatus } from "../../actions/articles/ops"
 
 class Articles extends Component {
     render() {
-        const { articles, fetchArticles } = this.props
+        const { articles, fetchArticles, ...ops } = this.props
         const { isFetching, list, error } = articles
         return (
             <div>
@@ -38,7 +39,11 @@ class Articles extends Component {
                 <br />
 
                 <TError err={error} />
-                {isFetching ? <Loading /> : <ArticleList articles={list} />}
+                {isFetching ? (
+                    <Loading />
+                ) : (
+                    <ArticleList {...ops} articles={list} />
+                )}
             </div>
         )
     }
@@ -50,6 +55,9 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     fetchArticles: () => dispatch(fetchAllArticles()),
+    onClick: article => dispatch(onArticleClick(article)),
+    changeStatus: (article, status) =>
+        dispatch(changeArticleStatus(article, status)),
 })
 
 export default withRouter(

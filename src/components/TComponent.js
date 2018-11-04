@@ -26,6 +26,19 @@ class TComponent extends Component {
         )
     }
 
+    fieldCheckbox(name) {
+        return (
+            <div>
+                {name + ": "}
+                <input
+                    type="checkbox"
+                    value={this.state[name]}
+                    onChange={this.checkbox(name)}
+                />
+            </div>
+        )
+    }
+
     passwordField(name) {
         return (
             <div>

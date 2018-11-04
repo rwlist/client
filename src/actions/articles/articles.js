@@ -5,7 +5,12 @@ import {
     ARTICLES_ALL_REQUEST,
     ARTICLES_ADD_MANY_REQUEST,
     ARTICLES_ADD_MANY_RESPONSE,
+    ARTICLE_PATCH_REQUEST,
+    ARTICLE_PATCH_ERROR,
+    ARTICLE_PATCH_RESPONSE,
 } from "../../constants/articles"
+
+/// fetchAll
 
 export function allArticlesRequest() {
     return {
@@ -40,6 +45,8 @@ export function fetchAllArticles() {
     }
 }
 
+/// addManyArticles
+
 export function addManyArticlesRequest(articles) {
     return {
         type: ARTICLES_ADD_MANY_REQUEST,
@@ -66,5 +73,48 @@ export function addManyArticles(articles) {
             .addMany(articles)
             .then(resp => dispatch(addManyArticlesResponse(resp)))
             .catch(err => dispatch(addManyArticlesResponse(err)))
+    }
+}
+
+/// patchArticle
+
+export function patchArticleRequest(article, prev) {
+    return {
+        type: ARTICLE_PATCH_REQUEST,
+        payload: {
+            article,
+            prev,
+        },
+    }
+}
+
+export function patchArticleResponse(article, prev) {
+    return {
+        type: ARTICLE_PATCH_RESPONSE,
+        payload: {
+            article,
+            prev,
+        },
+    }
+}
+
+export function patchArticleError(err, prev) {
+    return {
+        type: ARTICLE_PATCH_ERROR,
+        payload: {
+            err,
+            prev,
+        },
+    }
+}
+
+export function patchArticle(article, prev) {
+    return dispatch => {
+        dispatch(patchArticleRequest(article, prev))
+
+        return api.articles
+            .patch(article)
+            .then(resp => dispatch(patchArticleResponse(resp, prev)))
+            .catch(err => dispatch(patchArticleError(err, prev)))
     }
 }

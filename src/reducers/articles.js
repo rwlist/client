@@ -2,6 +2,9 @@ import {
     ARTICLES_ALL_REQUEST,
     ARTICLES_ALL_RESPONSE,
     ARTICLES_ALL_FAILURE,
+    ARTICLE_PATCH_REQUEST,
+    ARTICLE_PATCH_ERROR,
+    ARTICLE_PATCH_RESPONSE,
 } from "../constants/articles"
 
 import { articlesAddMany } from "./articlesAddMany"
@@ -39,7 +42,48 @@ export function articles(state = initialState, action) {
         default:
             return {
                 ...state,
+                list: processArticleEvents(state.list, action),
                 addMany: articlesAddMany(state.addMany, action),
             }
+    }
+}
+
+function processArticleEvents(list = [], action) {
+    switch (action.type) {
+        case ARTICLE_PATCH_REQUEST:
+            return list.map(it => {
+                if (it.id === action.payload.article.id) {
+                    return {
+                        ...action.payload.article,
+                        patching: "now",
+                    }
+                } else {
+                    return it
+                }
+            })
+        case ARTICLE_PATCH_RESPONSE:
+            return list.map(it => {
+                if (it.id === action.payload.article.id) {
+                    return {
+                        ...action.payload.article,
+                        patching: undefined,
+                    }
+                } else {
+                    return it
+                }
+            })
+        case ARTICLE_PATCH_ERROR:
+            return list.map(it => {
+                if (it.id === action.payload.prev.id) {
+                    return {
+                        ...action.payload.prev,
+                        patching: "error",
+                    }
+                } else {
+                    return it
+                }
+            })
+        default:
+            return list
     }
 }
