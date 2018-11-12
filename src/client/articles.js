@@ -10,5 +10,7 @@ export default opts => {
         addMany: articles => fetch("POST", ARTICLES_ADD_MANY, articles),
         all: () => fetch("GET", ARTICLES_ALL),
         patch: article => fetch("PATCH", ARTICLES_PATCH, article),
+        act: (article, url) =>
+            fetch("POST", `/articles/${article.id}${url}`, null),
     }
 }

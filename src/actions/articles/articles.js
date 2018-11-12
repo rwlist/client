@@ -8,6 +8,9 @@ import {
     ARTICLE_PATCH_REQUEST,
     ARTICLE_PATCH_ERROR,
     ARTICLE_PATCH_RESPONSE,
+    ARTICLE_ACT_REQUEST,
+    ARTICLE_ACT_RESPONSE,
+    ARTICLE_ACT_ERROR,
 } from "../../constants/articles"
 
 /// fetchAll
@@ -44,6 +47,48 @@ export function fetchAllArticles() {
             .catch(err => dispatch(allArticlesFailure(err)))
     }
 }
+
+export function actArticleRequest(article, url) {
+    return {
+        type: ARTICLE_ACT_REQUEST,
+        payload: {
+            id: article.id,
+            article,
+            url,
+        },
+    }
+}
+
+export function actArticleResponse(resp) {
+    return {
+        type: ARTICLE_ACT_RESPONSE,
+        payload: resp,
+    }
+}
+
+export function actArticleError(err, article) {
+    return {
+        type: ARTICLE_ACT_ERROR,
+        payload: {
+            id: article.id,
+            err,
+            article,
+        },
+    }
+}
+
+export function actArticle(article, url) {
+    return dispatch => {
+        dispatch(actArticleRequest(article, url))
+
+        return api.articles
+            .act(article, url)
+            .then(resp => dispatch(actArticleResponse(resp)))
+            .catch(err => dispatch(actArticleError(err, article)))
+    }
+}
+
+/// ALL BELOW IS DEPRECATED!
 
 /// addManyArticles
 

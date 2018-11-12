@@ -6,7 +6,7 @@ import TError from "../../components/TError"
 import ArticleList from "../../components/articles/ArticleList"
 import Loading from "../../components/Loading"
 import AddMany from "./AddMany"
-import { onArticleClick, changeArticleStatus } from "../../actions/articles/ops"
+import { onClick, setReadStatus } from "../../actions/articles/ops"
 
 class Articles extends Component {
     render() {
@@ -55,9 +55,9 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     fetchArticles: () => dispatch(fetchAllArticles()),
-    onClick: article => dispatch(onArticleClick(article)),
-    changeStatus: (article, status) =>
-        dispatch(changeArticleStatus(article, status)),
+    onClick: article => dispatch(onClick(article)),
+    setReadStatus: (article, status) =>
+        dispatch(setReadStatus(article, status)),
 })
 
 export default withRouter(

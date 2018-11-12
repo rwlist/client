@@ -5,6 +5,9 @@ import {
     ARTICLE_PATCH_REQUEST,
     ARTICLE_PATCH_ERROR,
     ARTICLE_PATCH_RESPONSE,
+    ARTICLE_ACT_REQUEST,
+    ARTICLE_ACT_RESPONSE,
+    ARTICLE_ACT_ERROR,
 } from "../constants/articles"
 
 import { articlesAddMany } from "./articlesAddMany"
@@ -77,6 +80,39 @@ function processArticleEvents(list = [], action) {
                 if (it.id === action.payload.prev.id) {
                     return {
                         ...action.payload.prev,
+                        patching: "error",
+                    }
+                } else {
+                    return it
+                }
+            })
+        case ARTICLE_ACT_REQUEST:
+            return list.map(it => {
+                if (it.id === action.payload.id) {
+                    return {
+                        ...it,
+                        patching: "now",
+                    }
+                } else {
+                    return it
+                }
+            })
+        case ARTICLE_ACT_RESPONSE:
+            return list.map(it => {
+                if (it.id === action.payload.id) {
+                    return {
+                        ...action.payload.article,
+                        patching: undefined,
+                    }
+                } else {
+                    return it
+                }
+            })
+        case ARTICLE_ACT_ERROR:
+            return list.map(it => {
+                if (it.id === action.payload.id) {
+                    return {
+                        ...it,
                         patching: "error",
                     }
                 } else {

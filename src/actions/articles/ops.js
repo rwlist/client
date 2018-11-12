@@ -1,4 +1,14 @@
-import { patchArticle } from "./articles"
+import { patchArticle, actArticle } from "./articles"
+
+export function onClick(article) {
+    return actArticle(article, "/click")
+}
+
+export function setReadStatus(article, status) {
+    return actArticle(article, "/read/status?newStatus=" + status)
+}
+
+/// ALL BELOW IS DEPRECATED
 
 export function onArticleClick(article) {
     return patchTags(article, tags => ({

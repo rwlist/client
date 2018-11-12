@@ -5,12 +5,11 @@ class Article extends Component {
     render() {
         const { data } = this.props
         const statuses = [
-            ["IRL", "#a6caf0"], // interested, read later
-            ["AWSM", "#50c878"], // awesome read
-            ["DSMS", "#ffff66"], // dismiss
-            ["REM", "#ffc0cb"], // remove
+            ["unopened", "#ffffff"],
+            ["viewed", "#ffff66"],
+            ["completed", "#50c878"],
         ]
-        const selected = statuses.find(it => it[0] === data.tags.status)
+        const selected = statuses.find(it => it[0] === data.status.readStatus)
 
         return (
             <div>
@@ -31,15 +30,19 @@ class Article extends Component {
                         rel="noopener noreferrer"
                         onClick={() => this.props.onClick(data)}
                     >
-                        <h3 className="Article-title">{data.tags.name}</h3>
+                        <h3 className="Article-title">{data.title}</h3>
                     </a>
-                    <p className="Article-undistract">Id: {data.id}</p>
-                    <p>Added: {data.added}</p>
-                    {data.tags.lastClicked ? (
-                        <p>Last clicked: {data.tags.lastClicked}</p>
+                    <p className="Article-below-title">
+                        <span className="Article-added">
+                            Added: {data.added}
+                        </span>
+                        <span className="Article-id">Id: {data.id}</span>
+                    </p>
+                    {data.status.lastClick ? (
+                        <p>Last clicked: {data.status.lastClick}</p>
                     ) : null}
-                    {data.tags.clicks ? (
-                        <p>Clicks: {data.tags.clicks}</p>
+                    {data.status.clicks ? (
+                        <p>Clicks: {data.status.clicks}</p>
                     ) : null}
 
                     {statuses.map(it => (
@@ -49,12 +52,15 @@ class Article extends Component {
                             style={
                                 selected !== it
                                     ? {
-                                          backgroundColor: it[1],
-                                          borderColor: it[1],
+                                          //   backgroundColor: it[1],
+                                          //   borderColor: it[1],
+                                          borderStyle: "dashed",
                                       }
                                     : {}
                             }
-                            onClick={() => this.props.changeStatus(data, it[0])}
+                            onClick={() =>
+                                this.props.setReadStatus(data, it[0])
+                            }
                         >
                             {it[0]}
                         </button>
