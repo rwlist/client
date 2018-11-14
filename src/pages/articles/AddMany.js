@@ -26,16 +26,15 @@ class AddMany extends TComponent {
 
         return (
             <div className="Articles_AddMany">
+                ДЕРЕВО ОТРЕЗКОВ ВРЕМЕННО НЕ РАБОТАЕТ!
                 <textarea
                     value={this.state.data}
                     onChange={this.text("data")}
                 />
                 <br />
-
                 <button onClick={this.action}>Добавить</button>
                 <br />
                 <br />
-
                 {isFetching ? <Loading /> : <ReactJson src={state.data} />}
             </div>
         )

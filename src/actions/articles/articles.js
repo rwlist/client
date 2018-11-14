@@ -6,6 +6,9 @@ import {
     ARTICLE_ACT_REQUEST,
     ARTICLE_ACT_RESPONSE,
     ARTICLE_ACT_ERROR,
+    ARTICLES_ACTION_REQUEST,
+    ARTICLES_ACTION_RESPONSE,
+    ARTICLES_ACTION_ERROR,
 } from "../../constants/articles"
 
 /// fetchAll
@@ -42,6 +45,8 @@ export function fetchAllArticles() {
             .catch(err => dispatch(allArticlesFailure(err)))
     }
 }
+
+// article act
 
 export function actArticleRequest(article, url) {
     return {
@@ -80,5 +85,46 @@ export function actArticle(article, url) {
             .act(article, url)
             .then(resp => dispatch(actArticleResponse(resp)))
             .catch(err => dispatch(actArticleError(err, article)))
+    }
+}
+
+// articles action
+
+export function actionArticlesRequest(action) {
+    return {
+        type: ARTICLES_ACTION_REQUEST,
+        payload: {
+            action,
+        },
+    }
+}
+
+export function actionArticlesResponse(resp, action) {
+    return {
+        type: ARTICLES_ACTION_RESPONSE,
+        payload: {
+            resp,
+            action,
+        },
+    }
+}
+
+export function actionArticlesError(err, action) {
+    return {
+        type: ARTICLES_ACTION_ERROR,
+        payload: {
+            err,
+            action,
+        },
+    }
+}
+
+export function actionArticles(action, req) {
+    return dispatch => {
+        dispatch(actionArticlesRequest(action))
+
+        return req(action)
+            .then(resp => dispatch(actionArticlesResponse(resp, action)))
+            .catch(err => dispatch(actionArticlesError(err, action)))
     }
 }

@@ -40,3 +40,13 @@
 .Article-id {
     float: right;
 }
+
+.Articles-add-container {
+    display: inline;
+    font-size: 14pt;
+    margin: 7px;
+}
+
+.Articles-add-button {
+    margin: 20px;
+}

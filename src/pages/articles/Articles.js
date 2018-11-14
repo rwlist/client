@@ -11,8 +11,10 @@ import {
     setReadStatus,
     changeRating,
     removeTag,
-    addTag
-} from '../../actions/articles/ops';
+    addTag,
+    addURL,
+} from "../../actions/articles/ops"
+import AddArticle from "../../components/articles/AddArticle"
 
 class Articles extends Component {
     render() {
@@ -31,12 +33,21 @@ class Articles extends Component {
                             Дерево отрезков
                         </Link>
                     </li>
+                    <li>
+                        <Link to={this.props.match.url + "/addURL"}>
+                            Добавить ссылочку
+                        </Link>
+                    </li>
                 </ul>
                 <br />
 
                 <Route
                     path={this.props.match.url + "/addMany"}
                     component={AddMany}
+                />
+                <Route
+                    path={this.props.match.url + "/addURL"}
+                    render={() => <AddArticle add={this.props.addURL} />}
                 />
                 <br />
 
@@ -67,6 +78,7 @@ const mapDispatchToProps = dispatch => ({
     changeRating: (article, delta) => dispatch(changeRating(article, delta)),
     removeTag: (article, tag) => dispatch(removeTag(article, tag)),
     addTag: (article, tag) => dispatch(addTag(article, tag)),
+    addURL: url => dispatch(addURL(url)),
 })
 
 export default withRouter(
