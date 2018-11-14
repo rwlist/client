@@ -4,7 +4,6 @@ import { connect } from "react-redux"
 import Loading from "../../components/Loading"
 import ReactJson from "react-json-view"
 import TComponent from "../../components/TComponent"
-import { addManyArticles } from "../../actions/articles/articles"
 import "./AddMany.css"
 
 class AddMany extends TComponent {
@@ -47,8 +46,8 @@ const mapStateToProps = state => ({
     state: state.articles.addMany,
 })
 
-const mapDispatchToProps = dispatch => ({
-    addMany: articles => dispatch(addManyArticles(articles)),
+const mapDispatchToProps = () => ({
+    // addMany: articles => dispatch(addManyArticles(articles)),
 })
 
 export default withRouter(
