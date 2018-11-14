@@ -10,7 +10,9 @@ import {
     onClick,
     setReadStatus,
     changeRating,
-} from "../../actions/articles/ops"
+    removeTag,
+    addTag
+} from '../../actions/articles/ops';
 
 class Articles extends Component {
     render() {
@@ -63,6 +65,8 @@ const mapDispatchToProps = dispatch => ({
     setReadStatus: (article, status) =>
         dispatch(setReadStatus(article, status)),
     changeRating: (article, delta) => dispatch(changeRating(article, delta)),
+    removeTag: (article, tag) => dispatch(removeTag(article, tag)),
+    addTag: (article, tag) => dispatch(addTag(article, tag)),
 })
 
 export default withRouter(

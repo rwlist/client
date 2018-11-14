@@ -3,7 +3,7 @@ import "./Article.css"
 import ReactTimeAgo from "react-time-ago"
 import Button from "../Button"
 import Rating from "./Rating"
-
+import Tags from "./Tags"
 class Article extends Component {
     formatDate(date) {
         return <ReactTimeAgo locale="en">{Date.parse(date)}</ReactTimeAgo>
@@ -69,6 +69,12 @@ class Article extends Component {
                     rating={data.status.rating}
                     ratingUp={() => this.props.changeRating(data, +1)}
                     ratingDown={() => this.props.changeRating(data, -1)}
+                />
+
+                <Tags
+                    data={data}
+                    remove={tag => this.props.removeTag(data, tag)}
+                    add={tag => this.props.addTag(data, tag)}
                 />
 
                 {data.patching ? <h4>¿PATCHING {data.patching}?</h4> : null}

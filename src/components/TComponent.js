@@ -13,15 +13,21 @@ class TComponent extends Component {
         }
     }
 
-    field(name) {
+    field(name, inline = false) {
+        const inp = (
+            <input
+                type="text"
+                value={this.state[name]}
+                onChange={this.text(name)}
+            />
+        )
+        if (inline) {
+            return inp
+        }
         return (
             <div>
                 {name + ": "}
-                <input
-                    type="text"
-                    value={this.state[name]}
-                    onChange={this.text(name)}
-                />
+                {inp}
             </div>
         )
     }

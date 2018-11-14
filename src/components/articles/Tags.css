@@ -1,0 +1,42 @@
+.Tags-caption {
+    font-size: 15pt;
+    margin-left: 3px;
+}
+
+.Tags-container {
+    display: flex;
+    flex-direction: column;
+    font-size: 14pt;
+}
+
+.Tags-add-container {
+    font-size: 14pt;
+    display: inline;
+    margin: 7px;
+}
+
+.Tags-add-button {
+    margin: 20px;
+}
+
+.Tag {
+    position: relative;
+    left: -7px;
+    font-size: 26pt;
+    display: flex;
+    align-items: center;
+}
+
+.Tag-content {
+    font-size: 11pt;
+    font-family: monospace;
+    display: inline;
+    border: 2px solid;
+    border-radius: 5px;
+    padding: 3px;
+}
+
+.Tag-delete {
+    font-size: 10pt;
+    margin-left: 20px;
+}
