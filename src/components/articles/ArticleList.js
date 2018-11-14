@@ -1,6 +1,7 @@
 import React from "react"
 import Article from "./Article"
 import TComponent from "../TComponent"
+import "./Article.css"
 
 class ArticleList extends TComponent {
     state = {
@@ -31,9 +32,11 @@ class ArticleList extends TComponent {
                 </div>
                 <br />
 
-                {arr.map(it => (
-                    <Article {...rest} key={it.id} data={it} />
-                ))}
+                <div className="Articles-container">
+                    {arr.map(it => (
+                        <Article {...rest} key={it.id} data={it} />
+                    ))}
+                </div>
             </div>
         )
     }

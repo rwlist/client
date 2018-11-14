@@ -1,7 +1,14 @@
 import React, { Component } from "react"
 import "./Article.css"
+import ReactTimeAgo from "react-time-ago"
+import Button from "../Button"
+import Rating from "./Rating"
 
 class Article extends Component {
+    formatDate(date) {
+        return <ReactTimeAgo locale="en">{Date.parse(date)}</ReactTimeAgo>
+    }
+
     render() {
         const { data } = this.props
         const statuses = [
@@ -12,62 +19,59 @@ class Article extends Component {
         const selected = statuses.find(it => it[0] === data.status.readStatus)
 
         return (
-            <div>
-                {/* <ReactJson className="overflow-x" src={data} /> */}
-                <div
-                    className={"Article"}
-                    style={
-                        selected
-                            ? {
-                                  backgroundColor: selected[1],
-                              }
-                            : {}
-                    }
+            <div
+                className={"Article"}
+                style={
+                    selected
+                        ? {
+                              backgroundColor: selected[1],
+                          }
+                        : {}
+                }
+            >
+                <a
+                    href={data.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => this.props.onClick(data)}
                 >
-                    <a
-                        href={data.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        onClick={() => this.props.onClick(data)}
-                    >
-                        <h3 className="Article-title">{data.title}</h3>
-                    </a>
-                    <p className="Article-below-title">
-                        <span className="Article-added">
-                            Added: {data.added}
-                        </span>
-                        <span className="Article-id">Id: {data.id}</span>
-                    </p>
-                    {data.status.lastClick ? (
-                        <p>Last clicked: {data.status.lastClick}</p>
-                    ) : null}
-                    {data.status.clicks ? (
-                        <p>Clicks: {data.status.clicks}</p>
-                    ) : null}
+                    <h3 className="Article-title">{data.title}</h3>
+                </a>
+                <div className="Article-below-title">
+                    <span className="Article-added">
+                        Added: {this.formatDate(data.added)}
+                    </span>
+                    <span className="Article-id">Id: {data.id}</span>
+                </div>
+                {data.status.lastClick ? (
+                    <p>Last clicked: {data.status.lastClick}</p>
+                ) : null}
+                {data.status.clicks ? (
+                    <p>Clicks: {data.status.clicks}</p>
+                ) : null}
 
+                <div className="Article-status-btns">
                     {statuses.map(it => (
-                        <button
+                        <Button
+                            big
                             key={it[0]}
-                            className="Article-status-btn"
-                            style={
-                                selected !== it
-                                    ? {
-                                          //   backgroundColor: it[1],
-                                          //   borderColor: it[1],
-                                          borderStyle: "dashed",
-                                      }
-                                    : {}
-                            }
+                            dashed={selected !== it}
                             onClick={() =>
                                 this.props.setReadStatus(data, it[0])
                             }
                         >
                             {it[0]}
-                        </button>
+                        </Button>
                     ))}
-
-                    {data.patching ? <h4>¿PATCHING {data.patching}?</h4> : null}
                 </div>
+
+                <Rating
+                    rating={data.status.rating}
+                    ratingUp={() => this.props.changeRating(data, +1)}
+                    ratingDown={() => this.props.changeRating(data, -1)}
+                />
+
+                {data.patching ? <h4>¿PATCHING {data.patching}?</h4> : null}
             </div>
         )
     }

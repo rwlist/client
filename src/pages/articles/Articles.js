@@ -6,7 +6,11 @@ import TError from "../../components/TError"
 import ArticleList from "../../components/articles/ArticleList"
 import Loading from "../../components/Loading"
 import AddMany from "./AddMany"
-import { onClick, setReadStatus } from "../../actions/articles/ops"
+import {
+    onClick,
+    setReadStatus,
+    changeRating,
+} from "../../actions/articles/ops"
 
 class Articles extends Component {
     render() {
@@ -58,6 +62,7 @@ const mapDispatchToProps = dispatch => ({
     onClick: article => dispatch(onClick(article)),
     setReadStatus: (article, status) =>
         dispatch(setReadStatus(article, status)),
+    changeRating: (article, delta) => dispatch(changeRating(article, delta)),
 })
 
 export default withRouter(
