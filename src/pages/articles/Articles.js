@@ -5,16 +5,14 @@ import { fetchAllArticles } from "../../actions/articles/articles"
 import TError from "../../components/TError"
 import ArticleList from "../../components/articles/ArticleList"
 import Loading from "../../components/Loading"
-import AddMany from "./AddMany"
+import Add from "./Add"
 import {
     onClick,
     setReadStatus,
     changeRating,
     removeTag,
     addTag,
-    addURL,
 } from "../../actions/articles/ops"
-import AddArticle from "../../components/articles/AddArticle"
 
 class Articles extends Component {
     render() {
@@ -29,26 +27,14 @@ class Articles extends Component {
                         <Link to={this.props.match.url}>KEK</Link>
                     </li>
                     <li>
-                        <Link to={this.props.match.url + "/addMany"}>
-                            Дерево отрезков
-                        </Link>
-                    </li>
-                    <li>
-                        <Link to={this.props.match.url + "/addURL"}>
-                            Добавить ссылочку
+                        <Link to={this.props.match.url + "/add"}>
+                            Новые руки
                         </Link>
                     </li>
                 </ul>
                 <br />
 
-                <Route
-                    path={this.props.match.url + "/addMany"}
-                    component={AddMany}
-                />
-                <Route
-                    path={this.props.match.url + "/addURL"}
-                    render={() => <AddArticle add={this.props.addURL} />}
-                />
+                <Route path={this.props.match.url + "/add"} component={Add} />
                 <br />
 
                 <button onClick={fetchArticles}>Обновить</button>
@@ -78,7 +64,6 @@ const mapDispatchToProps = dispatch => ({
     changeRating: (article, delta) => dispatch(changeRating(article, delta)),
     removeTag: (article, tag) => dispatch(removeTag(article, tag)),
     addTag: (article, tag) => dispatch(addTag(article, tag)),
-    addURL: url => dispatch(addURL(url)),
 })
 
 export default withRouter(

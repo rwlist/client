@@ -8,18 +8,46 @@ import {
     ARTICLE_ACT_REQUEST,
     ARTICLE_ACT_RESPONSE,
     ARTICLE_ACT_ERROR,
+    ARTICLES_ACTION_REQUEST,
+    ARTICLES_ACTION_RESPONSE,
+    ARTICLES_ACTION_ERROR,
 } from "../constants/articles"
-
-import { articlesAddMany } from "./articlesAddMany"
 
 const initialState = {
     isFetching: false,
     error: null,
     list: [],
-    addMany: articlesAddMany(undefined, {}),
 }
 
-export function articles(state = initialState, action) {
+const initialAddState = {
+    isFetching: false,
+    error: [],
+}
+
+function add(state = initialAddState, action) {
+    switch (action.type) {
+        case ARTICLES_ACTION_REQUEST:
+            return {
+                isFetching: true,
+                errors: [],
+            }
+        case ARTICLES_ACTION_RESPONSE:
+            return {
+                isFetching: false,
+                resp: action.payload.resp,
+                errors: [],
+            }
+        case ARTICLES_ACTION_ERROR:
+            return {
+                isFetching: false,
+                errors: action.payload.resp.errors,
+            }
+        default:
+            return state
+    }
+}
+
+export function all(state, action) {
     switch (action.type) {
         case ARTICLES_ALL_REQUEST:
             return {
@@ -42,12 +70,26 @@ export function articles(state = initialState, action) {
                 error: action.error,
                 list: [],
             }
+        case ARTICLES_ACTION_RESPONSE:
+            return {
+                ...state,
+                list: [
+                    ...(action.payload.resp.addedArticles || []),
+                    ...state.list,
+                ],
+            }
         default:
             return {
                 ...state,
                 list: processArticleEvents(state.list, action),
-                addMany: articlesAddMany(state.addMany, action),
             }
+    }
+}
+
+export function articles(state = initialState, action) {
+    return {
+        ...all(state, action),
+        add: add(state.add, action),
     }
 }
 

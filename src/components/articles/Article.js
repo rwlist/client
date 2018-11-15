@@ -4,6 +4,7 @@ import ReactTimeAgo from "react-time-ago"
 import Button from "../Button"
 import Rating from "./Rating"
 import Tags from "./Tags"
+
 class Article extends Component {
     formatDate(date) {
         return <ReactTimeAgo locale="en">{Date.parse(date)}</ReactTimeAgo>

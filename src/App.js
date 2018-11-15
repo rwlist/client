@@ -1,10 +1,11 @@
 import React, { Component } from "react"
-import { Route, BrowserRouter, Switch } from 'react-router-dom';
+import { Route, BrowserRouter, Switch } from "react-router-dom"
 
 import Login from "./components/login/Login"
 import SignUp from "./components/login/SignUp"
 import Base from "./pages/Base"
 import PrivateRoute from "./components/PrivateRoute"
+import "./App.css"
 
 class App extends Component {
     render() {
