@@ -38,7 +38,7 @@ class TComponent extends Component {
                 {name + ": "}
                 <input
                     type="checkbox"
-                    value={this.state[name]}
+                    checked={this.state[name]}
                     onChange={this.checkbox(name)}
                 />
             </div>

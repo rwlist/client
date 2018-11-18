@@ -27,7 +27,7 @@ class Add extends TComponent {
 
     render() {
         const { add } = this.props
-        const { isFetching, error } = add
+        const { isFetching } = add
 
         return (
             <div className="Articles_Add">
