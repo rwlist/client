@@ -8,14 +8,16 @@ class AddTag extends TComponent {
         tag: "",
     }
 
+    addTag = () => {
+        this.props.add(this.state.tag)
+        this.setState({ tag: "" })
+    }
+
     render() {
         return (
             <div className="Tags-add-container">
                 {this.field("tag", true)}
-                <Button
-                    className="Tags-add-button"
-                    onClick={() => this.props.add(this.state.tag)}
-                >
+                <Button className="Tags-add-button" onClick={this.addTag}>
                     Add
                 </Button>
             </div>
